@@ -42,7 +42,8 @@ export default function FontCollectionsPage() {
                     </span>
                     <span className="text-xs font-medium text-zinc-500 dark:text-zinc-400">
                       {fontCount} {fontCount === 1 ? "typeface" : "typefaces"}{" "}
-                      · {quizCount} {quizCount === 1 ? "quiz" : "quizzes"}
+                      · {quizCount}{" "}
+                      {quizCount === 1 ? "playable quiz" : "playable quizzes"}
                     </span>
                   </span>
                 </Link>

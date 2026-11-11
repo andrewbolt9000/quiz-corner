@@ -183,6 +183,9 @@ export default async function FontCollectionPage({
                         {quiz.title}
                       </h3>
                       <p className="mt-1 text-sm leading-6 text-zinc-600 dark:text-zinc-300">
+                        {quiz.description}
+                      </p>
+                      <p className="mt-1 text-sm leading-6 text-zinc-600 dark:text-zinc-300">
                         {getFormatDescription(quiz.format)} ·{" "}
                         {quiz.difficulty} · {quiz.questionCount}{" "}
                         {quiz.questionCount === 1 ? "question" : "questions"}
@@ -192,7 +195,7 @@ export default async function FontCollectionPage({
                       href={quiz.route}
                       className="shrink-0 rounded-lg bg-indigo-700 px-4 py-2 text-sm font-semibold text-white hover:bg-indigo-800 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-700 dark:bg-indigo-500 dark:text-zinc-950 dark:hover:bg-indigo-400 dark:focus-visible:outline-indigo-400"
                     >
-                      Open quiz
+                      Start quiz
                     </Link>
                   </li>
                 ))}

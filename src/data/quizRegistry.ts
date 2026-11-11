@@ -7,6 +7,7 @@ import {
   type FontCollectionId,
   type FontRecord,
 } from "./fontCatalog";
+import { collectionQuizDefinitions } from "./collectionQuizzes";
 import { crimsonFacesQuiz } from "./crimsonFacesQuiz";
 import { fontIdentificationQuiz } from "./fontIdentificationQuiz";
 import { artHistoryQuiz, type QuizData } from "./quizzes";
@@ -25,6 +26,7 @@ export type QuizDifficulty = "beginner" | "intermediate" | "advanced";
 export type QuizMetadata = {
   id: QuizId;
   title: string;
+  description: string;
   route: string;
   collectionIds: readonly FontCollectionId[];
   format: QuizFormat;
@@ -36,6 +38,7 @@ type QuizDefinition = {
   id: QuizId;
   quiz: QuizData;
   route: string;
+  collectionIds?: readonly FontCollectionId[];
   format: QuizFormat;
   difficulty: QuizDifficulty;
 };
@@ -62,6 +65,7 @@ const quizDefinitions = [
     format: "font-specimen",
     difficulty: "beginner",
   },
+  ...collectionQuizDefinitions,
 ] as const satisfies readonly QuizDefinition[];
 
 const validFormats = new Set<QuizFormat>([
@@ -109,7 +113,10 @@ function assertPublicFont(fontId: string): FontRecord {
   return font;
 }
 
-function getCollectionIdsForQuiz(quiz: QuizData): FontCollectionId[] {
+function getCollectionIdsForQuiz(
+  quiz: QuizData,
+  declaredCollectionIds?: readonly FontCollectionId[],
+): FontCollectionId[] {
   const collectionIds = new Set<FontCollectionId>();
 
   for (const question of quiz.questions) {
@@ -127,23 +134,41 @@ function getCollectionIdsForQuiz(quiz: QuizData): FontCollectionId[] {
       );
     }
 
-    for (const collectionId of font.collections) {
-      collectionIds.add(collectionId);
+    if (declaredCollectionIds) {
+      if (
+        !declaredCollectionIds.some((collectionId) =>
+          font.collections.includes(collectionId),
+        )
+      ) {
+        throw new Error(
+          `Quiz "${quiz.id}" specimen "${font.id}" is not a member of its declared collection.`,
+        );
+      }
+    } else {
+      for (const collectionId of font.collections) {
+        collectionIds.add(collectionId);
+      }
     }
   }
 
-  return [...collectionIds];
+  return declaredCollectionIds
+    ? [...declaredCollectionIds]
+    : [...collectionIds];
 }
 
 export const quizRegistry: readonly QuizMetadata[] = quizDefinitions.map(
-  ({ id, quiz, route, format, difficulty }) => ({
-    id,
-    title: quiz.title,
-    route,
-    collectionIds: getCollectionIdsForQuiz(quiz),
-    format,
-    difficulty,
-    questionCount: quiz.questions.length,
+  (definition) => ({
+    id: definition.id,
+    title: definition.quiz.title,
+    description: definition.quiz.description,
+    route: definition.route,
+    collectionIds: getCollectionIdsForQuiz(
+      definition.quiz,
+      "collectionIds" in definition ? definition.collectionIds : undefined,
+    ),
+    format: definition.format,
+    difficulty: definition.difficulty,
+    questionCount: definition.quiz.questions.length,
   }),
 );
 
@@ -188,6 +213,42 @@ export function validateQuizRegistries(): void {
           `Quiz "${definition.id}" references unknown collection "${collectionId}".`,
         );
       }
+    }
+
+    const questionIds = definition.quiz.questions.map(
+      (question) => question.id,
+    );
+    if (new Set(questionIds).size !== questionIds.length) {
+      throw new Error(
+        `Quiz "${definition.id}" contains duplicate question IDs.`,
+      );
+    }
+    for (const question of definition.quiz.questions) {
+      if (new Set(question.answers).size !== 4) {
+        throw new Error(
+          `Question "${question.id}" must have four distinct answers.`,
+        );
+      }
+      if (
+        question.correctAnswerIndex < 0 ||
+        question.correctAnswerIndex > 3
+      ) {
+        throw new Error(
+          `Question "${question.id}" has an invalid correct answer index.`,
+        );
+      }
+    }
+  }
+
+  for (const collection of fontCollections) {
+    if (
+      !quizRegistry.some((quiz) =>
+        quiz.collectionIds.includes(collection.id),
+      )
+    ) {
+      throw new Error(
+        `Collection "${collection.id}" must have at least one playable quiz.`,
+      );
     }
   }
 }
