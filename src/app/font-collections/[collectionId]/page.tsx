@@ -40,6 +40,8 @@ function getFormatDescription(format: QuizFormat): string {
       return "Font specimen identification";
     case "font-identification":
       return "Font identification";
+    case "font-knowledge":
+      return "Font knowledge";
     case "typeface-characteristics":
       return "Typeface characteristics";
     case "historical-knowledge":
@@ -133,6 +135,34 @@ export default async function FontCollectionPage({
                         <dd>{font.weight}</dd>
                         <dt className="font-semibold">Style</dt>
                         <dd>{font.style}</dd>
+                        {font.designer && (
+                          <>
+                            <dt className="font-semibold">Designer/source</dt>
+                            <dd className="break-words">{font.designer}</dd>
+                          </>
+                        )}
+                        {font.classification && (
+                          <>
+                            <dt className="font-semibold">Classification</dt>
+                            <dd className="break-words">{font.classification}</dd>
+                          </>
+                        )}
+                        {font.historicalContext && (
+                          <>
+                            <dt className="font-semibold">Context</dt>
+                            <dd className="break-words">
+                              {font.historicalContext}
+                            </dd>
+                          </>
+                        )}
+                        {font.designRelationship && (
+                          <>
+                            <dt className="font-semibold">Design relationship</dt>
+                            <dd className="break-words">
+                              {font.designRelationship}
+                            </dd>
+                          </>
+                        )}
                       </dl>
                     </div>
                     <div className="min-w-0 rounded-xl bg-zinc-50 px-4 py-5 dark:bg-zinc-950 sm:px-5">

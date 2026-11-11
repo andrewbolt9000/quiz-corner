@@ -1,7 +1,7 @@
 export const QUIZ_IDS = {
   artHistory: "art-history",
   fontIdentification: "font-identification",
-  crimsonFacesWeightStyle: "crimson-faces-weight-style",
+  fontKnowledge: "font-knowledge",
   historicallyImportant: "historically-important-quiz",
   blackletterGothic: "blackletter-gothic-quiz",
   serifBook: "serif-book-typography-quiz",

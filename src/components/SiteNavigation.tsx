@@ -27,10 +27,10 @@ export default function SiteNavigation() {
             Font Identification
           </Link>
           <Link
-            href="/crimson-faces/"
+            href="/quizzes/font-knowledge/"
             className="rounded px-2 py-1.5 text-zinc-700 hover:bg-zinc-100 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-700 dark:text-zinc-200 dark:hover:bg-zinc-800 dark:focus-visible:outline-indigo-400"
           >
-            Crimson Faces Quiz
+            Font Knowledge
           </Link>
           <Link
             href="/font-library/"

@@ -1,15 +1,14 @@
 import { notFound } from "next/navigation";
 
 import QuizPlayer from "../../../components/QuizPlayer";
-import { collectionQuizDefinitions } from "../../../data/collectionQuizzes";
-import { getQuizById } from "../../../data/quizRegistry";
+import { getQuizById, quizRegistry } from "../../../data/quizRegistry";
 
 export const dynamicParams = false;
 
 export function generateStaticParams() {
-  return collectionQuizDefinitions.map(({ id }) => ({
-    quizId: id,
-  }));
+  return quizRegistry
+    .filter((quiz) => quiz.route.startsWith("/quizzes/"))
+    .map(({ id }) => ({ quizId: id }));
 }
 
 export default async function CollectionQuizPage({
@@ -18,8 +17,9 @@ export default async function CollectionQuizPage({
   params: Promise<{ quizId: string }>;
 }) {
   const { quizId } = await params;
-  const definition = collectionQuizDefinitions.find(
-    (entry) => entry.id === quizId,
+  const definition = quizRegistry.find(
+    (entry) =>
+      entry.id === quizId && entry.route === `/quizzes/${quizId}/`,
   );
 
   if (!definition) {

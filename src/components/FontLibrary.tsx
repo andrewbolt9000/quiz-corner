@@ -349,7 +349,7 @@ export default function FontLibrary() {
             Explore type
           </h1>
           <p className="mt-2 max-w-prose text-sm leading-6 text-zinc-600 dark:text-zinc-300 sm:text-base">
-            Compare the local font collection side by side, or read a continuous
+            Compare public font specimens side by side, or read a continuous
             specimen that changes typeface as you move through it.
           </p>
         </header>

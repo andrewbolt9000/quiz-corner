@@ -2,7 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 
-import QuestionContent from "./QuestionContent";
+import QuestionContent, { type SpecimenTextMode } from "./QuestionContent";
 import type { AnswerIndex, Quiz } from "../data/quizzes";
 
 const answerIndexes: readonly AnswerIndex[] = [0, 1, 2, 3];
@@ -11,17 +11,23 @@ const answerLetters = ["A", "B", "C", "D"] as const;
 type QuizPlayerProps = {
   quiz: Quiz;
   shuffleOnStart?: boolean;
+  startButtonLabel?: string;
+  specimenTextSelector?: boolean;
 };
 
 export default function QuizPlayer({
   quiz,
   shuffleOnStart = false,
+  startButtonLabel = "Start quiz",
+  specimenTextSelector = false,
 }: QuizPlayerProps) {
   const [questionIndex, setQuestionIndex] = useState(0);
   const [selectedAnswer, setSelectedAnswer] = useState<AnswerIndex | null>(
     null,
   );
   const [score, setScore] = useState(0);
+  const [specimenTextMode, setSpecimenTextMode] =
+    useState<SpecimenTextMode>("alphabet");
   const [activeQuiz, setActiveQuiz] = useState<Quiz | null>(
     shuffleOnStart ? null : quiz,
   );
@@ -163,7 +169,7 @@ export default function QuizPlayer({
               onClick={startQuiz}
               className="mt-5 w-full rounded-xl bg-indigo-700 px-5 py-3.5 text-base font-semibold text-white shadow-sm transition hover:bg-indigo-800 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-700 dark:bg-indigo-500 dark:text-zinc-950 dark:hover:bg-indigo-400"
             >
-              Start quiz
+              {startButtonLabel}
             </button>
           </div>
         ) : totalQuestions === 0 ? (
@@ -260,7 +266,15 @@ export default function QuizPlayer({
               >
                 {question.content.prompt}
               </legend>
-              <QuestionContent content={question.content} />
+              <QuestionContent
+                content={question.content}
+                specimenTextMode={
+                  specimenTextSelector ? specimenTextMode : undefined
+                }
+                onSpecimenTextModeChange={
+                  specimenTextSelector ? setSpecimenTextMode : undefined
+                }
+              />
               <div className="space-y-3">
                 {answerIndexes.map((answerIndex) => {
                   const answer = question.answers[answerIndex];

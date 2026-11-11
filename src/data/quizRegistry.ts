@@ -8,7 +8,7 @@ import {
   type FontRecord,
 } from "./fontCatalog";
 import { collectionQuizDefinitions } from "./collectionQuizzes";
-import { crimsonFacesQuiz } from "./crimsonFacesQuiz";
+import { fontKnowledgeQuiz } from "./fontKnowledgeQuiz";
 import { fontIdentificationQuiz } from "./fontIdentificationQuiz";
 import { artHistoryQuiz, type QuizData } from "./quizzes";
 import { QUIZ_IDS, type QuizId } from "./quizIds";
@@ -16,6 +16,7 @@ import { QUIZ_IDS, type QuizId } from "./quizIds";
 export type QuizFormat =
   | "font-specimen"
   | "font-identification"
+  | "font-knowledge"
   | "typeface-characteristics"
   | "historical-knowledge"
   | "typeface-comparison"
@@ -59,11 +60,11 @@ const quizDefinitions = [
     difficulty: "beginner",
   },
   {
-    id: QUIZ_IDS.crimsonFacesWeightStyle,
-    quiz: crimsonFacesQuiz,
-    route: "/crimson-faces/",
-    format: "font-specimen",
-    difficulty: "beginner",
+    id: QUIZ_IDS.fontKnowledge,
+    quiz: fontKnowledgeQuiz,
+    route: `/quizzes/${QUIZ_IDS.fontKnowledge}/`,
+    format: "font-knowledge",
+    difficulty: "intermediate",
   },
   ...collectionQuizDefinitions,
 ] as const satisfies readonly QuizDefinition[];
@@ -71,6 +72,7 @@ const quizDefinitions = [
 const validFormats = new Set<QuizFormat>([
   "font-specimen",
   "font-identification",
+  "font-knowledge",
   "typeface-characteristics",
   "historical-knowledge",
   "typeface-comparison",
