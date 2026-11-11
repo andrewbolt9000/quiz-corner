@@ -10,7 +10,7 @@ import {
 import { collectionQuizDefinitions } from "./collectionQuizzes";
 import { fontKnowledgeQuiz } from "./fontKnowledgeQuiz";
 import { fontIdentificationQuiz } from "./fontIdentificationQuiz";
-import { artHistoryQuiz, type QuizData } from "./quizzes";
+import type { QuizData } from "./quizzes";
 import { QUIZ_IDS, type QuizId } from "./quizIds";
 
 export type QuizFormat =
@@ -45,13 +45,6 @@ type QuizDefinition = {
 };
 
 const quizDefinitions = [
-  {
-    id: QUIZ_IDS.artHistory,
-    quiz: artHistoryQuiz,
-    route: "/",
-    format: "historical-knowledge",
-    difficulty: "beginner",
-  },
   {
     id: QUIZ_IDS.fontIdentification,
     quiz: fontIdentificationQuiz,

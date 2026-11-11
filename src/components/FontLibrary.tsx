@@ -69,7 +69,7 @@ function ArticleFontRow({
         {font.name}
       </span>
       <p
-        className="min-w-0 break-words text-base leading-relaxed text-zinc-800 [overflow-wrap:anywhere] dark:text-zinc-200 sm:text-lg"
+        className="min-w-0 break-words text-[1rem] leading-relaxed text-zinc-800 [overflow-wrap:anywhere] dark:text-zinc-200 sm:text-[1.125rem]"
         style={{
           fontFamily: `"${font.family}", serif`,
           fontWeight: font.weight,
@@ -339,7 +339,7 @@ export default function FontLibrary() {
   }
 
   return (
-    <main className="flex-1 bg-gradient-to-br from-indigo-50 via-zinc-50 to-amber-50 px-4 py-8 dark:from-zinc-950 dark:via-zinc-950 dark:to-indigo-950 sm:px-6 sm:py-12">
+    <main className="flex-1 bg-black px-4 py-8 sm:px-6 sm:py-12">
       <div className="mx-auto w-full max-w-5xl overflow-hidden rounded-3xl border border-white/80 bg-white shadow-xl shadow-indigo-950/5 dark:border-zinc-800 dark:bg-zinc-900 dark:shadow-black/20">
         <header className="border-b border-zinc-100 px-5 py-6 dark:border-zinc-800 sm:px-9 sm:py-8">
           <p className="mb-3 text-sm font-bold uppercase tracking-[0.14em] text-indigo-700 dark:text-indigo-300">

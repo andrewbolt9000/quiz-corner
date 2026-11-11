@@ -31,6 +31,9 @@ export default function FontIdentificationPage() {
         shuffleOnStart
         startButtonLabel="Quiz Me on All Fonts"
         specimenTextSelector
+        trainingFontIds={fontCatalog
+          .filter((font) => font.licensingStatus === "cleared")
+          .map((font) => font.id)}
       />
 
       <section className="border-y border-indigo-100 bg-white px-4 py-8 dark:border-zinc-800 dark:bg-zinc-900 sm:px-6 sm:py-10">

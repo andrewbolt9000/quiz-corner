@@ -1,16 +1,11 @@
 import type { Metadata } from "next";
 import type { ReactNode } from "react";
 
-import { Geist, Geist_Mono } from "next/font/google";
+import { Geist_Mono } from "next/font/google";
 import PublicFontStylesheet from "../components/PublicFontStylesheet";
 import SiteNavigation from "../components/SiteNavigation";
 import "./globals.css";
 
-
-const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
-});
 
 const geistMono = Geist_Mono({
   variable: "--font-geist-mono",
@@ -19,16 +14,16 @@ const geistMono = Geist_Mono({
 
 export const metadata: Metadata = {
   title: "Quiz Corner",
-  description: "Explore typography, art history, and interactive quizzes.",
+  description: "Explore typography and interactive quizzes.",
 };
 
 export default function RootLayout({ children }: { children: ReactNode }) {
-    return (
+  return (
     <html
       lang="en"
-      className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
+      className={`${geistMono.variable} h-full bg-black antialiased`}
     >
-      <body className="min-h-full flex flex-col">
+      <body className="min-h-full flex flex-col bg-black">
         <SiteNavigation />
         <PublicFontStylesheet />
         {children}

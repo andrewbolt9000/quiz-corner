@@ -1,5 +1,4 @@
 export const QUIZ_IDS = {
-  artHistory: "art-history",
   fontIdentification: "font-identification",
   fontKnowledge: "font-knowledge",
   historicallyImportant: "historically-important-quiz",

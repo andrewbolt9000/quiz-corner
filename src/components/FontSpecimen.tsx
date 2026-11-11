@@ -3,6 +3,7 @@ import type { CSSProperties, ReactNode } from "react";
 type FontSpecimenProps = {
   fontFamily: string;
   sampleText: string;
+  className?: string;
   fontSize?: CSSProperties["fontSize"];
   fontWeight?: CSSProperties["fontWeight"];
   fontStyle?: CSSProperties["fontStyle"];
@@ -15,6 +16,7 @@ type FontSpecimenProps = {
 export default function FontSpecimen({
   fontFamily,
   sampleText,
+  className = "",
   fontSize = "2rem",
   fontWeight,
   fontStyle,
@@ -24,7 +26,7 @@ export default function FontSpecimen({
   showCaption = true,
 }: FontSpecimenProps) {
   return (
-    <figure className="min-w-0 max-w-full">
+    <figure className={`min-w-0 max-w-full ${className}`}>
       {fontAvailable ? (
         <p
           className="whitespace-pre-wrap break-words leading-relaxed [overflow-wrap:anywhere]"

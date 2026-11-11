@@ -6,16 +6,16 @@ import { getQuizzesForCollection } from "../../data/quizRegistry";
 
 export default function FontCollectionsPage() {
   return (
-    <main className="flex-1 bg-gradient-to-br from-indigo-50 via-zinc-50 to-amber-50 px-4 py-8 dark:from-zinc-950 dark:via-zinc-950 dark:to-indigo-950 sm:px-6 sm:py-12">
+    <main className="flex-1 bg-black px-4 py-8 sm:px-6 sm:py-12">
       <div className="mx-auto w-full max-w-5xl">
         <header className="mb-8">
           <p className="text-sm font-bold uppercase tracking-[0.14em] text-indigo-700 dark:text-indigo-300">
             Explore and learn
           </p>
-          <h1 className="mt-2 text-3xl font-bold tracking-tight text-zinc-950 dark:text-white sm:text-4xl">
+          <h1 className="mt-2 text-3xl font-bold tracking-tight text-white sm:text-4xl">
             Font Collections
           </h1>
-          <p className="mt-3 max-w-2xl text-sm leading-6 text-zinc-600 dark:text-zinc-300 sm:text-base">
+          <p className="mt-3 max-w-2xl text-sm leading-6 text-zinc-300 sm:text-base">
             Collections group related public typefaces so you can compare their
             forms, learn about their design traditions, and try a quiz for each
             topic.

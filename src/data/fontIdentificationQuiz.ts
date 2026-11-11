@@ -1,23 +1,6 @@
 import { fontCatalog } from "./fontCatalog";
-import type { FontRecord } from "./fontCatalog";
 import { QUIZ_IDS } from "./quizIds";
 import type { QuizData, QuizQuestion } from "./quizzes";
-
-const samplePassages = [
-  "Across the quiet valley, lanterns marked a path home at dusk. (2026)",
-  "THE QUICK BROWN FOX jumps over 13 lazy dogs; then rests.",
-  "At 7:45 p.m., Mina wrote: “Meet near the old stone bridge!”",
-  "Blueprints changed overnight—Unit 4B was ready by 10:30.",
-] as const;
-
-const hieroglyphSample =
-  "𓀀 𓀁 𓀂 𓀃 𓀄 𓀅 — 2026! A quiet sample, set on 12/10.";
-
-function getSample(font: FontRecord, index: number): string {
-  return font.id === "noto-egyptian-hieroglyphs"
-    ? hieroglyphSample
-    : samplePassages[index % samplePassages.length];
-}
 
 function makeFontIdentificationQuiz(): QuizData {
   const eligibleFonts = fontCatalog.filter(
@@ -30,7 +13,7 @@ function makeFontIdentificationQuiz(): QuizData {
     );
   }
 
-  const questions = eligibleFonts.map((target, index) => {
+  const questions = eligibleFonts.map((target) => {
     const distractors = eligibleFonts.filter((font) => font.id !== target.id);
     const selectedDistractors = [0, 1, 2].map(
       (slot) => distractors[Math.floor((slot * distractors.length) / 3)],
@@ -65,18 +48,12 @@ function makeFontIdentificationQuiz(): QuizData {
       correctAnswerIndex,
       content: {
         kind: "font-specimen",
-        prompt: "Which typeface is this?",
         specimen: {
           fontId: target.id,
           fontFamily: target.family,
           fontWeight: target.weight,
           fontStyle: target.style,
-          sampleText: getSample(target, index),
           fontAvailable: target.licensingStatus === "cleared",
-          accessibleDescription:
-            target.id === "noto-egyptian-hieroglyphs"
-              ? "Six Egyptian hieroglyph characters, followed by punctuation, numerals, and a short Latin passage."
-              : undefined,
         },
       },
     } satisfies QuizQuestion;

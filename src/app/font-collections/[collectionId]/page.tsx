@@ -79,18 +79,18 @@ export default async function FontCollectionPage({
   const quizzes = getQuizzesForCollection(collectionId);
 
   return (
-    <main className="flex-1 bg-gradient-to-br from-indigo-50 via-zinc-50 to-amber-50 px-4 py-8 dark:from-zinc-950 dark:via-zinc-950 dark:to-indigo-950 sm:px-6 sm:py-12">
+    <main className="flex-1 bg-black px-4 py-8 sm:px-6 sm:py-12">
         <article className="mx-auto w-full max-w-5xl">
           <p className="text-sm font-bold uppercase tracking-[0.14em] text-indigo-700 dark:text-indigo-300">
             Typeface Collection
           </p>
-          <h1 className="mt-2 text-3xl font-bold tracking-tight text-zinc-950 dark:text-white sm:text-4xl">
+          <h1 className="mt-2 text-3xl font-bold tracking-tight text-white sm:text-4xl">
             {collection.name}
           </h1>
-          <p className="mt-3 max-w-3xl text-sm leading-6 text-zinc-600 dark:text-zinc-300 sm:text-base">
+          <p className="mt-3 max-w-3xl text-sm leading-6 text-zinc-300 sm:text-base">
             {collection.description}
           </p>
-          <p className="mt-4 text-sm">
+          <p className="mt-4 text-sm text-zinc-300">
             <Link
               href="/font-collections/"
               className="font-semibold text-indigo-700 underline underline-offset-2 hover:text-indigo-900 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-700 dark:text-indigo-300 dark:hover:text-indigo-200 dark:focus-visible:outline-indigo-400"

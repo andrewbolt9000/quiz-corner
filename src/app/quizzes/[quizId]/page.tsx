@@ -1,6 +1,7 @@
 import { notFound } from "next/navigation";
 
 import QuizPlayer from "../../../components/QuizPlayer";
+import { fontCatalog } from "../../../data/fontCatalog";
 import { getQuizById, quizRegistry } from "../../../data/quizRegistry";
 
 export const dynamicParams = false;
@@ -26,5 +27,26 @@ export default async function CollectionQuizPage({
     notFound();
   }
 
-  return <QuizPlayer quiz={getQuizById(quizId)} />;
+  const quiz = getQuizById(quizId);
+  const hasFontSpecimens = quiz.questions.some(
+    (question) => question.content.kind === "font-specimen",
+  );
+  const trainingFontIds = fontCatalog
+    .filter(
+      (font) =>
+        font.licensingStatus === "cleared" &&
+        definition.collectionIds.some((collectionId) =>
+          font.collections.includes(collectionId),
+        ),
+    )
+    .map((font) => font.id);
+
+  return (
+    <QuizPlayer
+      quiz={quiz}
+      shuffleOnStart={hasFontSpecimens}
+      specimenTextSelector={hasFontSpecimens}
+      trainingFontIds={hasFontSpecimens ? trainingFontIds : undefined}
+    />
+  );
 }
