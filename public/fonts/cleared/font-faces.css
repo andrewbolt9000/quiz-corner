@@ -1,0 +1,95 @@
+@font-face {
+  font-family: "Crimson";
+  src: url("./Crimson-Roman.otf") format("opentype");
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Crimson";
+  src: url("./Crimson-Semibold.otf") format("opentype");
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Crimson";
+  src: url("./Crimson-Bold.otf") format("opentype");
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Crimson";
+  src: url("./Crimson-Italic.otf") format("opentype");
+  font-style: italic;
+  font-weight: 400;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Crimson";
+  src: url("./Crimson-SemiboldItalic.otf") format("opentype");
+  font-style: italic;
+  font-weight: 600;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Crimson";
+  src: url("./Crimson-BoldItalic.otf") format("opentype");
+  font-style: italic;
+  font-weight: 700;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Fette Classic UNZ Fraktur";
+  src: url("./FetteClassicUnzFraktur-KMne.ttf") format("truetype");
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Fette UNZ Fraktur";
+  src: url("./FetteUnzFraktur-2jRX.ttf") format("truetype");
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Gloria Hallelujah";
+  src: url("./GloriaHallelujah-Regular.ttf") format("truetype");
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Gochi Hand";
+  src: url("./GochiHand-Regular.ttf") format("truetype");
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Jost";
+  src: url("./Jost-Medium.ttf") format("truetype");
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Noto Sans Egyptian Hieroglyphs";
+  src: url("./NotoSansEgyptianHieroglyphs-Regular.ttf") format("truetype");
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+}

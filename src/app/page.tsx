@@ -1,6 +1,7 @@
 import QuizPlayer from "../components/QuizPlayer";
-import { artHistoryQuiz } from "../data/quizzes";
+import { getQuizById } from "../data/quizRegistry";
+import { QUIZ_IDS } from "../data/quizIds";
 
 export default function Home() {
-  return <QuizPlayer quiz={artHistoryQuiz} />;
+  return <QuizPlayer quiz={getQuizById(QUIZ_IDS.artHistory)} />;
 }

@@ -21,6 +21,8 @@
 
 # Miscellaneous
 .DS_Store
+/fonts-local/
+/src/data/fontArchive.json
 
 # Debug logs
 npm-debug.log*

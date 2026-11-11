@@ -1,28 +1,57 @@
+import type { PublicFontId } from "./fontCatalog";
+import { QUIZ_IDS } from "./quizIds";
+
 export type AnswerIndex = 0 | 1 | 2 | 3;
+
+export type QuizSpecimen = {
+  fontId: PublicFontId;
+  fontFamily: string;
+  fontWeight: 400 | 500 | 600 | 700;
+  fontStyle: "normal" | "italic";
+  sampleText: string;
+  fontAvailable?: boolean;
+  accessibleDescription?: string;
+};
+
+export type QuizQuestionContent =
+  | {
+      kind: "text";
+      prompt: string;
+      explanation?: string;
+    }
+  | {
+      kind: "font-specimen";
+      prompt: string;
+      explanation?: string;
+      specimen: QuizSpecimen;
+    };
 
 export type QuizQuestion = {
   id: string;
-  prompt: string;
   answers: readonly [string, string, string, string];
   correctAnswerIndex: AnswerIndex;
-  explanation?: string;
+  content: QuizQuestionContent;
 };
 
-export type Quiz = {
+type QuizDetails = {
   id: string;
   title: string;
   description: string;
+};
+
+export type QuizData = QuizDetails & {
   questions: readonly QuizQuestion[];
 };
 
+export type Quiz = QuizData;
+
 export const artHistoryQuiz = {
-  id: "art-history",
+  id: QUIZ_IDS.artHistory,
   title: "Art History",
   description: "Five questions about notable works of Western art.",
   questions: [
     {
       id: "mona-lisa",
-      prompt: "Who painted the Mona Lisa?",
       answers: [
         "Leonardo da Vinci",
         "Michelangelo",
@@ -30,12 +59,21 @@ export const artHistoryQuiz = {
         "Sandro Botticelli",
       ],
       correctAnswerIndex: 0,
-      explanation:
-        "Leonardo da Vinci painted the Mona Lisa, generally dated to the early 16th century.",
+      content: {
+        kind: "text",
+        prompt: "Who painted the Mona Lisa?",
+        explanation:
+          "Leonardo da Vinci painted the Mona Lisa, generally dated to the early 16th century.",
+      },
     },
     {
       id: "sistine-chapel-ceiling",
-      prompt: "Who painted the ceiling of the Sistine Chapel in the Vatican?",
+      content: {
+        kind: "text",
+        prompt: "Who painted the ceiling of the Sistine Chapel in the Vatican?",
+        explanation:
+          "Michelangelo painted the Sistine Chapel ceiling for Pope Julius II; the work was completed in 1512.",
+      },
       answers: [
         "Raphael",
         "Michelangelo",
@@ -43,12 +81,15 @@ export const artHistoryQuiz = {
         "Leonardo da Vinci",
       ],
       correctAnswerIndex: 1,
-      explanation:
-        "Michelangelo painted the Sistine Chapel ceiling for Pope Julius II; the work was completed in 1512.",
     },
     {
       id: "guernica",
-      prompt: "Who painted Guernica in 1937?",
+      content: {
+        kind: "text",
+        prompt: "Who painted Guernica in 1937?",
+        explanation:
+          "Pablo Picasso painted Guernica in 1937. The work responds to the bombing of the Basque town of Guernica during the Spanish Civil War.",
+      },
       answers: [
         "Salvador Dalí",
         "Joan Miró",
@@ -56,12 +97,15 @@ export const artHistoryQuiz = {
         "Diego Velázquez",
       ],
       correctAnswerIndex: 2,
-      explanation:
-        "Pablo Picasso painted Guernica in 1937. The work responds to the bombing of the Basque town of Guernica during the Spanish Civil War.",
     },
     {
       id: "impression-sunrise",
-      prompt: "Who painted Impression, soleil levant (Impression, Sunrise)?",
+      content: {
+        kind: "text",
+        prompt: "Who painted Impression, soleil levant (Impression, Sunrise)?",
+        explanation:
+          "Claude Monet painted Impression, soleil levant. The painting's title was later associated with the name of the Impressionist movement.",
+      },
       answers: [
         "Édouard Manet",
         "Pierre-Auguste Renoir",
@@ -69,12 +113,15 @@ export const artHistoryQuiz = {
         "Claude Monet",
       ],
       correctAnswerIndex: 3,
-      explanation:
-        "Claude Monet painted Impression, soleil levant. The painting's title was later associated with the name of the Impressionist movement.",
     },
     {
       id: "david-sculpture",
-      prompt: "Who sculpted the marble statue of David completed in 1504?",
+      content: {
+        kind: "text",
+        prompt: "Who sculpted the marble statue of David completed in 1504?",
+        explanation:
+          "Michelangelo carved the marble David between 1501 and 1504. The statue is now displayed at the Galleria dell'Accademia in Florence.",
+      },
       answers: [
         "Donatello",
         "Michelangelo",
@@ -82,8 +129,6 @@ export const artHistoryQuiz = {
         "Auguste Rodin",
       ],
       correctAnswerIndex: 1,
-      explanation:
-        "Michelangelo carved the marble David between 1501 and 1504. The statue is now displayed at the Galleria dell'Accademia in Florence.",
     },
   ],
-} satisfies Quiz;
+} satisfies QuizData;
